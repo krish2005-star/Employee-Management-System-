@@ -28,3 +28,25 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### ========== ADD THESE LINES ========== ###
+
+# Secrets and Configuration
+config.properties
+
+# IntelliJ IDEA (additional)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Compiled files
+*.class
+target/
+
+# External libraries (optional)
+libraries/*.jar
+lib/*.jar
+
+# Logs
+*.log
