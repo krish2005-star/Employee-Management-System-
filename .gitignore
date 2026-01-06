@@ -32,7 +32,7 @@ bin/
 ### ========== ADD THESE LINES ========== ###
 
 # Secrets and Configuration
-config.properties
+src/config.properties
 
 # IntelliJ IDEA (additional)
 .idea/

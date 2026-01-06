@@ -1,21 +1,15 @@
+import util.DatabaseConnection;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Testjdbc {
-    public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/employee_db";
-        String username = "postgres";
-        String password = "1234";
+    // Create a test file or test in Main.java
 
-        try{
-            Connection conn = DriverManager.getConnection(url,username,password);
-            if(conn != null){
-                System.out.println("Connected to the database");
-                conn.close();
+        public static void main(String[] args) {
+            Connection conn = DatabaseConnection.getConnection();
+            if (conn != null) {
+                System.out.println("✅ Connection successful!");
             }
-        }catch (Exception e){
-            System.out.println("Connection FAILED "+e.getMessage());
-            e.printStackTrace();
         }
-    }
 }
