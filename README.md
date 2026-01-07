@@ -1,8 +1,8 @@
 # Employee Management System
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=coffeescript&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![JDBC](https://img.shields.io/badge/JDBC-007396?style=for-the-badge&logo=java&logoColor=white)
+![JDBC](https://img.shields.io/badge/JDBC-007396?style=for-the-badge&logo=databricks&logoColor=white)
 
 A console-based Employee Management System built with Java and PostgreSQL for efficient employee data management through CRUD operations. Developed to strengthen core Java backend development skills including JDBC, database design, and software architecture principles.
 
