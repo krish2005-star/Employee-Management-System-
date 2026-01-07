@@ -94,7 +94,7 @@ public class EmployeeDAO {
             pstmt.setString(3,employee.getDepartment());
             pstmt.setDouble(4,employee.getSalary());
             pstmt.setString(5,employee.getPhone());
-            pstmt.setInt(5,employee.getId());
+            pstmt.setInt(6,employee.getId());
             int rows = pstmt.executeUpdate();
             if(rows>0){
                 return true;
