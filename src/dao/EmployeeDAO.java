@@ -11,24 +11,28 @@ public class EmployeeDAO {
     // CREATE
     public boolean addEmployee(Employee employee) {
         String sql = "insert into employees(name,email,department,salary,phone) values(?,?,?,?,?)";
+        //duplicate email check
+        if (emailExists(employee.getEmail())) {
+            System.out.println("Error: Email already exists!");
+            return false;
+        }
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        try(
-            Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)){
-
-            pstmt.setString(1,employee.getName());
-            pstmt.setString(2,employee.getEmail());
-            pstmt.setString(3,employee.getDepartment());
-            pstmt.setDouble(4,employee.getSalary());
-            pstmt.setString(5,employee.getPhone());
+            pstmt.setString(1, employee.getName());
+            pstmt.setString(2, employee.getEmail());
+            pstmt.setString(3, employee.getDepartment());
+            pstmt.setDouble(4, employee.getSalary());
+            pstmt.setString(5, employee.getPhone());
 
             int rows = pstmt.executeUpdate();
-            if(rows>0){
+            if (rows > 0) {
                 return true;
             }
 
-        }catch (SQLException e){
-            System.out.println("Error: "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
         }
         return false;
     }
@@ -86,6 +90,10 @@ public class EmployeeDAO {
     //UPDATE
     public boolean updateEmployee(Employee employee) {
         String sql="update employees set name=?,email=?,department=?,salary=?,phone=? where id=?";
+        if (emailExistsForOtherEmployee(employee.getEmail(),employee.getId())) {
+            System.out.println("Error: Email already exists!");
+            return false;
+        }
         try(
             Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -118,6 +126,43 @@ public class EmployeeDAO {
             }
         }catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
+        }
+        return false;
+    }
+
+    private boolean emailExists(String email) {
+        String sql = "select count(*) from employees where email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking email: " + e.getMessage());
+        }
+        return false;
+    }
+
+    private boolean emailExistsForOtherEmployee(String email, int employeeId) {
+        String sql = "SELECT COUNT(*) FROM employees WHERE email = ? AND id != ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            pstmt.setInt(2, employeeId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking email: " + e.getMessage());
         }
         return false;
     }

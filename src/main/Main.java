@@ -50,16 +50,18 @@ public class Main{
 
     public static void addEmployee(){
         System.out.println("\n-----Add Employee-----");
+        sc.nextLine();
         System.out.println("Enter Name : ");
-        String name = sc.next();
+        String name = sc.nextLine();
         System.out.println("Enter Email : ");
-        String email = sc.next();
+        String email = sc.nextLine();
         System.out.println("Enter Department : ");
-        String department = sc.next();
+        String department = sc.nextLine();
         System.out.println("Enter Salary : ");
         double salary = sc.nextDouble();
+        sc.nextLine();
         System.out.println("Enter Phone Number : ");
-        String phone = sc.next();
+        String phone = sc.nextLine();
         Employee employee = new Employee(name,email,department,salary,phone);
         if(employeeDAO.addEmployee(employee))
             System.out.println("Employee Added Successfully");
@@ -105,15 +107,16 @@ public class Main{
         System.out.println(checkEmployee.toString());
         System.out.println("Enter the new details:\n---------------------------");
         System.out.println("Enter Name : ");
-        String name = sc.next();
+        String name = sc.nextLine();
         System.out.println("Enter Email : ");
-        String email = sc.next();
+        String email = sc.nextLine();
         System.out.println("Enter Department : ");
-        String department = sc.next();
+        String department = sc.nextLine();
         System.out.println("Enter Salary : ");
         double salary = sc.nextDouble();
+        sc.nextLine();
         System.out.println("Enter Phone Number : ");
-        String phone = sc.next();
+        String phone = sc.nextLine();
         Employee employee = new Employee(id,name,email,department,salary,phone);
         if(employeeDAO.updateEmployee(employee))
             System.out.println("Employee Updated Successfully");
@@ -131,10 +134,12 @@ public class Main{
             System.out.println("Employee Not Found");
             return;
         }
-        System.out.println("Are you sure you want to delete the employee with ID("+id+")?\n(yes/no");
+        System.out.println("Are you sure you want to delete the employee with ID("+id+")?\n(yes/no)");
         String choice = sc.next();
-        if(choice.equals("yes"))
+        if(choice.equals("yes")){
+            employeeDAO.deleteEmployee(id);
             System.out.println("Employee Deleted Successfully");
+        }
         else
             System.out.println("Failed to delete Employee");
     }
