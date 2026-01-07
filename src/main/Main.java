@@ -51,17 +51,40 @@ public class Main{
     public static void addEmployee(){
         System.out.println("\n-----Add Employee-----");
         sc.nextLine();
-        System.out.println("Enter Name : ");
+
+        System.out.print("Enter Name: ");
         String name = sc.nextLine();
-        System.out.println("Enter Email : ");
+        if (!isValidName(name)) {
+            System.out.println("Invalid name, name must be at least 2 characters.");
+            return;
+        }
+        System.out.print("Enter Email: ");
         String email = sc.nextLine();
-        System.out.println("Enter Department : ");
+        if (!isValidEmail(email)) {
+            System.out.println("Invalid email format, (example: user@domain.com)");
+            return;
+        }
+        System.out.print("Enter Department: ");
         String department = sc.nextLine();
-        System.out.println("Enter Salary : ");
-        double salary = sc.nextDouble();
-        sc.nextLine();
-        System.out.println("Enter Phone Number : ");
+        if (!isValidName(department)) {
+            System.out.println("Invalid department name");
+            return;
+        }
+        System.out.print("Enter Salary: ");
+        double salary;
+        salary = sc.nextDouble();
+        sc.nextLine(); // Consume newline
+        if (!isValidSalary(salary)) {
+            System.out.println("Invalid salary, must be between 10,000 and 10,000,000.");
+            return;
+        }
+        System.out.print("Enter Phone (10 digits): ");
         String phone = sc.nextLine();
+        if (!isValidPhone(phone)) {
+            System.out.println("Invalid phone number, must be 10 digits starting with 6/7/8/9.");
+            return;
+        }
+
         Employee employee = new Employee(name,email,department,salary,phone);
         if(employeeDAO.addEmployee(employee))
             System.out.println("Employee Added Successfully");
@@ -142,5 +165,23 @@ public class Main{
         }
         else
             System.out.println("Failed to delete Employee");
+    }
+
+    // Validation check of input
+    private static boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(emailRegex);
+    }
+
+    private static boolean isValidPhone(String phone) {
+        return phone.matches("^[6-9]\\d{9}$"); // 10 digits starting with 6-9
+    }
+
+    private static boolean isValidSalary(double salary) {
+        return salary >= 10000 && salary <= 10000000; // Reasonable range
+    }
+
+    private static boolean isValidName(String name) {
+        return name != null && !name.trim().isEmpty() && name.length() >= 2;
     }
 }
