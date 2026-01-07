@@ -131,7 +131,7 @@ EmployeeManagementSys/
 **Mogilepalli Naga Sai Krishna Kshitij**
 
 - 📧 Email: m.krishna0513@gmail.com
-- 💼 LinkedIn: [LinkedIn](https://www.linkedin.com/in/naga-sai-krishna-kshitij-mogilepalli-7b907a2b9/)
+- 💼 LinkedIn: [Krishna Kshitij](https://www.linkedin.com/in/naga-sai-krishna-kshitij-mogilepalli-7b907a2b9/)
 - 🌐 Portfolio: [mnskk.framer.website](https://mnskk.framer.website/)
 - 💻 GitHub: [@krish2005-star](https://github.com/krish2005-star)
 
